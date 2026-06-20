@@ -2,25 +2,25 @@ package UnitThree;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class RegistrationForm {
 
     public static void main(String[] args) {
 
         JFrame frame = new JFrame("Registration Form");
-        frame.setSize(600, 650);
+        frame.setSize(600, 600); // Increased height
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(true);
         frame.setLayout(null);
         frame.getContentPane().setBackground(new Color(245, 248, 255));
-
-        Font labelFont = new Font("Arial", Font.BOLD, 14);
 
         // Title
         JLabel title = new JLabel("User Registration Form");
         title.setFont(new Font("Arial", Font.BOLD, 22));
         title.setBounds(170, 20, 300, 30);
         frame.add(title);
+
+        Font labelFont = new Font("Arial", Font.BOLD, 14);
 
         // Full Name
         JLabel nameLabel = new JLabel("Full Name:");
@@ -42,28 +42,18 @@ public class RegistrationForm {
         emailField.setBounds(200, 130, 250, 30);
         frame.add(emailField);
 
-        // Password
-        JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setFont(labelFont);
-        passwordLabel.setBounds(80, 180, 100, 25);
-        frame.add(passwordLabel);
-
-        JPasswordField passwordField = new JPasswordField();
-        passwordField.setBounds(200, 180, 250, 30);
-        frame.add(passwordField);
-
         // Gender
         JLabel genderLabel = new JLabel("Gender:");
         genderLabel.setFont(labelFont);
-        genderLabel.setBounds(80, 230, 100, 25);
+        genderLabel.setBounds(80, 180, 100, 25);
         frame.add(genderLabel);
 
         JRadioButton maleRadioButton = new JRadioButton("Male");
-        maleRadioButton.setBounds(200, 230, 80, 30);
+        maleRadioButton.setBounds(200, 180, 80, 30);
         maleRadioButton.setBackground(new Color(245, 248, 255));
 
         JRadioButton femaleRadioButton = new JRadioButton("Female");
-        femaleRadioButton.setBounds(300, 230, 90, 30);
+        femaleRadioButton.setBounds(300, 180, 90, 30);
         femaleRadioButton.setBackground(new Color(245, 248, 255));
 
         ButtonGroup buttonGroup = new ButtonGroup();
@@ -76,39 +66,39 @@ public class RegistrationForm {
         // Country
         JLabel countryLabel = new JLabel("Country:");
         countryLabel.setFont(labelFont);
-        countryLabel.setBounds(80, 280, 100, 25);
+        countryLabel.setBounds(80, 230, 100, 25);
         frame.add(countryLabel);
 
         String[] countries = {"Nepal", "India", "China", "Bhutan"};
         JComboBox<String> countryComboBox = new JComboBox<>(countries);
-        countryComboBox.setBounds(200, 280, 250, 30);
+        countryComboBox.setBounds(200, 230, 250, 30);
         frame.add(countryComboBox);
 
         // Hobbies
         JLabel hobbyLabel = new JLabel("Hobbies:");
         hobbyLabel.setFont(labelFont);
-        hobbyLabel.setBounds(80, 330, 100, 25);
+        hobbyLabel.setBounds(80, 280, 100, 25);
         frame.add(hobbyLabel);
 
         JCheckBox music = new JCheckBox("Music");
-        music.setBounds(200, 330, 80, 25);
+        music.setBounds(200, 280, 80, 25);
         music.setBackground(new Color(245, 248, 255));
         frame.add(music);
 
         JCheckBox sports = new JCheckBox("Sports");
-        sports.setBounds(290, 330, 80, 25);
+        sports.setBounds(290, 280, 80, 25);
         sports.setBackground(new Color(245, 248, 255));
         frame.add(sports);
 
         JCheckBox reading = new JCheckBox("Reading");
-        reading.setBounds(380, 330, 90, 25);
+        reading.setBounds(380, 280, 90, 25);
         reading.setBackground(new Color(245, 248, 255));
         frame.add(reading);
 
         // Skills
         JLabel skillLabel = new JLabel("Skills:");
         skillLabel.setFont(labelFont);
-        skillLabel.setBounds(80, 380, 100, 25);
+        skillLabel.setBounds(80, 330, 100, 25);
         frame.add(skillLabel);
 
         String[] skills = {"Java", "Python", "C#", "C"};
@@ -117,88 +107,22 @@ public class RegistrationForm {
         skillList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         JScrollPane scrollPane = new JScrollPane(skillList);
-        scrollPane.setBounds(200, 380, 150, 80);
+        scrollPane.setBounds(200, 330, 150, 80);
         frame.add(scrollPane);
 
         // Submit Button
         JButton registerButton = new JButton("Submit");
-        registerButton.setBounds(220, 500, 120, 40);
+        registerButton.setBounds(230, 440, 120, 40);
         registerButton.setBackground(new Color(70, 130, 180));
-        registerButton.setForeground(Color.WHITE);
         registerButton.setFocusPainted(false);
-
         frame.add(registerButton);
 
-        // Button Action
+        //button action
         registerButton.addActionListener(e -> {
-
             String name = nameField.getText();
             String email = emailField.getText();
-            String password = new String(passwordField.getPassword());
-
-            // Validation
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(
-                        frame,
-                        "Please fill all required fields!",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE
-                );
-                return;
-            }
-
-            // Gender
-            String gender = "";
-            if (maleRadioButton.isSelected()) {
-                gender = "Male";
-            } else if (femaleRadioButton.isSelected()) {
-                gender = "Female";
-            }
-
-            // Country
-            String country = countryComboBox.getSelectedItem().toString();
-
-            // Hobbies
-            String hobbies = "";
-
-            if (music.isSelected()) {
-                hobbies += "Music ";
-            }
-
-            if (sports.isSelected()) {
-                hobbies += "Sports ";
-            }
-
-            if (reading.isSelected()) {
-                hobbies += "Reading ";
-            }
-
-            // Skills
-            List<String> selectedSkills = skillList.getSelectedValuesList();
-
-            String skillData = "";
-
-            for (String skill : selectedSkills) {
-                skillData += skill + " ";
-            }
-
-            // Display Information
-            String message =
-                    "Name: " + name +
-                            "\nEmail: " + email +
-                            "\nPassword: " + password +
-                            "\nGender: " + gender +
-                            "\nCountry: " + country +
-                            "\nHobbies: " + hobbies +
-                            "\nSkills: " + skillData;
-
-            JOptionPane.showMessageDialog(
-                    frame,
-                    message,
-                    "Registration Successful",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
-        });
+            String gender = genderLabel.getText();
+                });
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
