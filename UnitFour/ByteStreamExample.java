@@ -16,7 +16,6 @@ public class ByteStreamExample {
             fos.write(contentBytes);
 
             System.out.println("File written successfully.");
-
         } catch (IOException e) {
             e.printStackTrace();
         }
